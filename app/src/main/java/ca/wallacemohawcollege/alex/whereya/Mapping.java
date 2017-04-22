@@ -23,6 +23,7 @@ import java.util.List;
 public class Mapping extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    List<locTable> locations = new ArrayList<locTable>();
     List<String> names = new ArrayList<String>();
     List<String> aLat = new ArrayList<String>();
     List<String> aLong = new ArrayList<String>();
@@ -34,15 +35,22 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapping);
-        names.add(0,"first");
-        names.add(1,"second");
-        names.add(2,"third");
-        aLat.add(0,"0");
-        aLong.add(0,"0");
-        aLat.add(1,"43");
-        aLong.add(1,"70");
-        aLat.add(2,"-34");
-        aLong.add(2,"108");
+        locTable first = new locTable();
+        locTable second = new locTable();
+        locTable third = new locTable();
+        first.setName("First");
+        first.setLat("0");
+        first.setLon("0");
+        second.setName("Second");
+        second.setLat("48");
+        second.setLon("72");
+        third.setName("Third");
+        third.setLat("-48");
+        third.setLon("-72");
+        locations.add(0,first);
+        locations.add(1,second);
+        locations.add(2,third);
+        loc_array();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -122,6 +130,16 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void loc_array()
+    {
+        for (locTable item:
+             locations) {
+            names.add(item.getName());
+            aLat.add(item.getLat());
+            aLong.add(item.getLon());
         }
     }
 
