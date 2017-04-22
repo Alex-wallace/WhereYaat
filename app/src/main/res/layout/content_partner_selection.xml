@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ca.wallacemohawcollege.alex.whereya.PartnerSelection"
+    tools:showIn="@layout/activity_partner_selection">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Partners"
+        android:id="@+id/selecttxt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/selectedtxt"
+        android:nestedScrollingEnabled="true"
+        android:layout_below="@+id/selecttxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search:"
+        android:id="@+id/searchlbl"
+        android:layout_below="@+id/selectedtxt"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pSearchtxt"
+        android:layout_below="@+id/searchlbl"
+        android:layout_alignStart="@+id/selectedtxt"
+        android:layout_alignEnd="@+id/selectedtxt" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:id="@+id/nextbtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="53dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pParnterlst"
+        android:layout_below="@+id/pSearchtxt"
+        android:layout_alignStart="@+id/pSearchtxt"
+        android:layout_marginTop="31dp"
+        android:layout_above="@+id/nextbtn"
+        android:choiceMode="multipleChoice" />
+
+</RelativeLayout>

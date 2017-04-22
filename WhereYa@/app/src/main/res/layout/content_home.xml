@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ca.wallacemohawcollege.alex.whereya.Home"
+    tools:showIn="@layout/activity_home">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Partner Page"
+        android:id="@+id/Partnerbtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Map Page"
+        android:id="@+id/mapbutton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Options"
+        android:id="@+id/opbutton"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/mapbutton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search:"
+        android:id="@+id/searchlbl"
+        android:layout_below="@+id/Partnerbtn"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="97dp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Searchtxt"
+        android:layout_below="@+id/searchlbl"
+        android:layout_toEndOf="@+id/searchlbl" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Partners"
+        android:id="@+id/partnerlbl"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/partnerlbl"
+        android:layout_alignEnd="@+id/opbutton"
+        android:layout_toEndOf="@+id/partnerlbl" />
+
+</RelativeLayout>

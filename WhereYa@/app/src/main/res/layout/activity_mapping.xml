@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ca.wallacemohawcollege.alex.whereya.Options">
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map" android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent" android:layout_height="250dp" tools:context="ca.wallacemohawcollege.alex.whereya.Mapping" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorites Saved:"
+        android:id="@+id/favlbl"
+        android:layout_below="@+id/map"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/favlbl"
+        android:layout_alignStart="@+id/Nametxt"
+        android:layout_alignEnd="@+id/Nametxt" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorite Name"
+        android:id="@+id/namelbl"
+        android:layout_below="@+id/spinner2"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Nametxt"
+        android:layout_below="@+id/namelbl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/addbtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

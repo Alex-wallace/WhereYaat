@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">WhereYa@</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">I did a thing</string>
+    <string-array name="Countries">
+        <item>Canada</item>
+        <item>United States</item>
+        <item>Britain</item>
+        <item>Spain</item>
+        <item>France</item>
+    </string-array>
+    <string-array name="Questions">
+        <item>What was your mother\'s maiden name?</item>
+        <item>What was your first cat\'s name?</item>
+        <item>Where did you first live?</item>
+        <item>What was for favorite food growing up?</item>
+    </string-array>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_security_q">SecurityQ</string>
+    <string name="title_activity_recovery">recovery</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_partner_selection">PartnerSelection</string>
+    <string name="title_activity_partner_map">Map</string>
+    <string name="title_activity_mapping">Map</string>
+    <string name="Subtext">Submit</string>
+</resources>
