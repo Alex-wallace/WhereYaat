@@ -97,15 +97,32 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
         int Lat = 0;
         int Long = 0;
         try{
-            Lat = Integer.parseInt(aLat.get(position));
-            Long = Integer.parseInt(aLong.get(position));
-        }catch (Exception e)
-        {
+            Lat = Integer.parseInt(aLat.get(0));
+            Long = Integer.parseInt(aLong.get(0));
+        }catch (Exception e) {
             e.printStackTrace();
         }
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(Lat, Long);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        placeMarks();
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+    public void placeMarks(){
+        int Lat = 0;
+        int Long = 0;
+        String name = null;
+        for(int x =0; x<names.size();x++) {
+            try {
+                Lat = Integer.parseInt(aLat.get(x));
+                Long = Integer.parseInt(aLong.get(x));
+                name = names.get(x);
+                LatLng pos = new LatLng(Lat,Long);
+                mMap.addMarker(new MarkerOptions().position(pos).title(name));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
