@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -23,6 +24,9 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     List<String> names = new ArrayList<String>();
+    List<String> aLat = new ArrayList<String>();
+    List<String> aLong = new ArrayList<String>();
+    int  position;
 
 
 
@@ -33,6 +37,12 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
         names.add(0,"first");
         names.add(1,"second");
         names.add(2,"third");
+        aLat.add(0,"0");
+        aLong.add(0,"0");
+        aLat.add(1,"43");
+        aLong.add(1,"70");
+        aLat.add(2,"-34");
+        aLong.add(2,"108");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -40,8 +50,33 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,names) ;
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner favs = (Spinner) findViewById(R.id.spinner2);
+        final Spinner favs = (Spinner) findViewById(R.id.spinner2);
         favs.setAdapter(adapter);
+
+        favs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                position = favs.getSelectedItemPosition();
+                int Lat = 0;
+                int Long = 0;
+                try{
+                    Lat = Integer.parseInt(aLat.get(position));
+                    Long = Integer.parseInt(aLong.get(position));
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                LatLng pos = new LatLng(Lat,Long);
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
 
 
     }
@@ -59,9 +94,17 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        int Lat = 0;
+        int Long = 0;
+        try{
+            Lat = Integer.parseInt(aLat.get(position));
+            Long = Integer.parseInt(aLong.get(position));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(Lat, Long);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
