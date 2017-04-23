@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -28,6 +30,7 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
     List<String> aLat = new ArrayList<String>();
     List<String> aLong = new ArrayList<String>();
     int  position;
+    LatLng cursor = null;
 
 
 
@@ -56,20 +59,21 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,names) ;
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,names) ;
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner favs = (Spinner) findViewById(R.id.spinner2);
         favs.setAdapter(adapter);
-
+        final Button add = (Button) findViewById(R.id.addbtn);
+        final EditText name = (EditText) findViewById(R.id.Nametxt);
         favs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 position = favs.getSelectedItemPosition();
-                int Lat = 0;
-                int Long = 0;
+                double Lat = 0;
+                double Long = 0;
                 try{
-                    Lat = Integer.parseInt(aLat.get(position));
-                    Long = Integer.parseInt(aLong.get(position));
+                    Lat = Double.parseDouble(aLat.get(position));
+                    Long = Double.parseDouble(aLong.get(position));
                 }catch (Exception e)
                 {
                     e.printStackTrace();
@@ -81,6 +85,28 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cursor != null)
+                {
+                    if(!name.getText().equals(""))
+                    {
+                        locTable item = array_loc(name.getText().toString(),cursor.latitude,cursor.longitude);
+
+                        locations.add(item);
+                        names.add(item.getName());
+                        aLat.add(item.getLat());
+                        aLong.add(item.getLon());
+                        //adapter.add(name.getText().toString());
+                        mMap.clear();
+                        name.setText("");
+
+                        placeMarks();
+                    }
+                }
             }
         });
 
@@ -102,28 +128,38 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        int Lat = 0;
-        int Long = 0;
+        double Lat = 0;
+        double Long = 0;
         try{
-            Lat = Integer.parseInt(aLat.get(0));
-            Long = Integer.parseInt(aLong.get(0));
+            Lat = Double.parseDouble(aLat.get(0));
+            Long = Double.parseDouble(aLong.get(0));
         }catch (Exception e) {
             e.printStackTrace();
         }
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(Lat, Long);
+        LatLng pos = new LatLng(Lat, Long);
         placeMarks();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+                cursor = latLng;
+                mMap.addMarker(new MarkerOptions().position(cursor));
+            }
+        });
+
     }
 
+
     public void placeMarks(){
-        int Lat = 0;
-        int Long = 0;
+        double Lat = 0;
+        double Long = 0;
         String name = null;
         for(int x =0; x<names.size();x++) {
             try {
-                Lat = Integer.parseInt(aLat.get(x));
-                Long = Integer.parseInt(aLong.get(x));
+                Lat = Double.parseDouble(aLat.get(x));
+                Long = Double.parseDouble(aLong.get(x));
                 name = names.get(x);
                 LatLng pos = new LatLng(Lat,Long);
                 mMap.addMarker(new MarkerOptions().position(pos).title(name));
@@ -141,6 +177,16 @@ public class Mapping extends FragmentActivity implements OnMapReadyCallback {
             aLat.add(item.getLat());
             aLong.add(item.getLon());
         }
+    }
+
+    private locTable array_loc(String name, double Lat, double Long)
+    {
+        locTable result = new locTable();
+        result.setName(name);
+        result.setLat(String.valueOf(Lat));
+        result.setLon(String.valueOf(Long));
+        return result;
+
     }
 
 }

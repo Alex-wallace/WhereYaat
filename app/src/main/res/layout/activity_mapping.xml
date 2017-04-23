@@ -29,8 +29,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner2"
         android:layout_below="@+id/favlbl"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/Nametxt"
+        android:layout_alignEnd="@+id/Nametxt" />
 
     <TextView
         android:layout_width="wrap_content"
